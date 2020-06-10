@@ -1,0 +1,87 @@
+.bootstrap-select div ul li a span{
+    font-size: 15px;
+}
+
+#custom-md6 div{
+    min-width: 100%!important;
+}
+.bs-caret, .caret{
+    visibility: hidden!important;
+}
+.row-center{
+
+    align-content: center;
+}
+.container-questionnaire-edit{
+    max-width: 70%;
+}
+.form-group-questionnaire{
+    min-width: 90%;
+}
+.card-body-custom{
+    left: 0.5%;
+}
+#sortable1, #sortable2 {
+    border: 1px solid #eee;
+    width: 95%;
+    min-height: 350px;
+    max-height: 350px;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px 0 0 0;
+    float: left;
+    margin-right: 10px;
+    overflow: scroll;
+}
+.search-list{
+    width: 95%;
+}
+.active-green-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #00c853;;
+    box-shadow: 0 0 0 1px #00c853;;
+}
+.active-green-3 input[type=text] {
+    border: 1px solid #00c853;
+    box-shadow: 0 0 0 1px #00c853;
+}
+.active-red-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #bf360c;
+    box-shadow: 0 0 0 1px #bf360c;
+}
+.active-red-3 input[type=text] {
+    border: 1px solid #bf360c;
+    box-shadow: 0 0 0 1px #bf360c;
+}
+.active-cyan-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+}
+.active-cyan-3 input[type=text] {
+    border: 1px solid #4dd0e1;
+    box-shadow: 0 0 0 1px #4dd0e1;
+}
+.arrow-col{
+    align-content: center;
+    align-self: center;
+    right: -4%;
+}
+.icon-custom{
+    font-size: 75px!important;
+}
+#sortable1 li, #sortable2 li {
+    margin: 0 5px 5px 5px;
+    padding: 5px;
+    font-size: 2.2em;
+    width: 98%;
+    color: black;
+    background: none;
+}
+.search-list-custom{
+    font-size: 195%!important;
+}
+#sortable2 li{
+    border: 1px solid #00c853;
+}
+#sortable1 li{
+    border: 1px solid #bf360c;
+}

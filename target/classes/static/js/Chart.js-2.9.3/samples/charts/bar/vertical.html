@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Bar Chart</title>
+	<script src="../../../dist/Chart.min.js"></script>
+	<script src="../../utils.js"></script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+
+<body>
+<div id="container" style="width: 75%;">
+	<canvas id="canvas"></canvas>
+</div>
+<script>
+	var color = Chart.helpers.color;
+	var config = {
+		type: 'bar',
+		data: {
+			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'Dataset 1',
+				backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
+				borderColor: window.chartColors.blue,
+				borderWidth: 1,
+				data: [
+					30,
+					10,
+					80,
+					80,
+					70,
+					50,
+					80
+				]
+			}]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				position: 'top',
+			},
+			title: {
+				display: true,
+				text: 'Chart.js Bar Chart'
+			},
+
+			ticks: {
+				suggestedMin: 0,
+				suggestedMax: 100
+			}
+
+		}
+	};
+
+	window.onload = function () {
+		var ctx = document.getElementById('canvas').getContext('2d');
+		window.myBar = new Chart(ctx, config);
+
+	};
+</script>
+</body>
+
+</html>

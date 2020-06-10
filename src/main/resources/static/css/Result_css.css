@@ -1,0 +1,21 @@
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+    width: 100%!important;
+}
+.card-filtros{
+    min-height: 550px!important;
+}
+.button-custom-filtro{
+    font-size: 20px!important;
+    background-color: #01015A!important;
+    left: 0;
+}
+.change-chart{
+    min-height: 115px;
+    border: 0;
+    border-radius: 20px;
+    min-width: 88px;
+    font-size: 22px;
+    margin-top: 12%;
+    background-color: #eeeec3!important;
+    margin-left: 2%
+}

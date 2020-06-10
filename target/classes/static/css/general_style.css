@@ -1,0 +1,374 @@
+
+/*
+estilos checkbox
+ */
+.containerCheck {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.containerCheck input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmarkBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheck:hover input ~ .checkmarkBox {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerCheck input:checked ~ .checkmarkBox {
+    background-color: #01015A;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkBox:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerCheck input:checked ~ .checkmarkBox:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerCheck .checkmarkBox:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/*estilos radio*/
+.containerCheckRadio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.containerCheckRadio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.containerCheckRadio:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.containerCheckRadio input:checked ~ .checkmark {
+    background-color: #01015A;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.containerCheckRadio input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.containerCheckRadio .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+
+
+body{
+    min-height: 90%;
+    font-size: 125%;
+    min-width: 100%;
+    overflow-x: hidden;
+}
+.Sing-out-class{
+    position: absolute;
+    left: 87%;
+}
+.question-p{
+    font-size: 19px;
+    font-weight: bold;
+}
+.name_user_icon{
+    text-align: center;
+}
+#role_user{
+    font-size: 12px;
+}
+.container-questionnaire-edit{
+    max-width: 1140px!important;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 85%;
+    left: 0;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+#respuestas div div select {
+    height:auto!important;
+    margin-top: 4.5%;
+}
+#respuestas div input{
+    max-width: 50%;
+}
+#logo{
+    width:4%!important;
+    margin-left: 2%;
+}
+#add_question_icon{
+    font-size: 60px;
+    position: absolute;
+    right: 50%;
+}
+.a-custom{
+    color: #01015A!important;
+}
+.a-header{
+    color:#FFFFFF!important;
+}
+a{
+    color: #ffffff;
+}
+.dropdown-item:hover{
+    background-color: #01015A!important;
+    color: #ffffff!important;
+}
+.not_registry_question{
+    text-align: center;
+}
+.navbar-footer{
+    bottom: 0;
+    left: 37%;
+    margin-top: 3%;
+}
+.navbar-custom {
+    background: linear-gradient(0deg,#01015A,#000000)!important;
+}
+.container-custom{
+    font-size: 22px!important;
+    padding-right: 15px!important;
+    padding-left: 15px!important;
+    margin-left: 3%!important;
+    margin-right: 2%!important;
+    position: relative!important;
+    min-width: 96%!important;
+    min-height: 535px!important;
+}
+.font-size-navbar{
+    font-size: 19px!important;
+}
+.form-reg{
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: 0;
+    margin-left: 20%;
+    margin-top: 0%;
+}
+.form-control-cumtom{
+    background-image:  linear-gradient(to top, #01015A 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px)!important;
+}
+.buttom-custom-form{
+    background-color: #01015A!important;
+    color: #FFFFFF;
+}
+.a-form{
+    color: #01015A!important;
+}
+.button-custom{
+    background-color: #01015A!important;
+    left: 50%;
+    position: relative;
+}
+.wrapper-custom{
+    position: relative;
+    top: 0;
+    min-height: 42%;
+    min-width: 60%;
+}
+.button-custom-login{
+    background-color: #01015A!important;
+    left: 0;
+}
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color:#ffffff
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #ffffff;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+body {
+    background-color: #f9f9fa
+}
+
+.flex {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+    .padding {
+        padding: 1.5rem
+    }
+}
+
+@media (max-width:767.98px) {
+    .padding {
+        padding: 1rem
+    }
+}
+
+.padding {
+    padding: 5rem
+}
+
+.card {
+    background: #fff;
+    border-width: 0;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+    margin-bottom: 1.5rem
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(19, 24, 44, .125);
+    border-radius: .25rem
+}
+
+.card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    border-bottom: 1px solid rgba(19, 24, 44, .125)
+}
+
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+}
+.img-logo{
+    position: relative;
+    left: 26%;
+    width: 50%;
+}
+.form-signin {
+    width: 100%;
+    max-width: 35%;
+    padding: 15px;
+    margin: 0;
+    margin-left: 32%;
+    margin-top: 2%;
+    border-radius: 13%;
+}
+.card-custom{
+    min-width: 100%;
+}
+.card-body-custom{
+    left: 0!important;
+}
+.card-header-custom{
+    background: linear-gradient(0deg,#01015A,#000000)!important;
+}
+.body-newAccount{
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.form-control-selector{
+    -webkit-appearance: listbox!important;
+}
