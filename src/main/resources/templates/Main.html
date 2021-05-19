@@ -52,7 +52,10 @@
 <body class="" style="overflow-x:hidden; overflow-y:hidden">
 
 {{>Header}}
-<div style="width:70%; margin-left: 15%;margin-top: -10px">
+<ul class="breadcrumb">
+    <li><a href="/MainPage">Home</a></li>
+</ul>
+<div style="width:70%; margin-left: 20%;margin-top: -10px">
     <input hidden id="categories" value="{{#categories}}{{.}},{{/categories}}"></input>
     <input hidden id="percent" value="{{#percent}}{{.}},{{/percent}}"></input>
     <canvas id="canvas" class = "radar"></canvas>
@@ -73,7 +76,7 @@
             data: {
                 labels: arrayCategory,
                 datasets: [{
-                    label: 'Resultados Por categorías',
+                    label: 'Resultados Por categorías (Media de todos los cuestionarios resueltos)',
                     backgroundColor: color(window.chartColors.blue).alpha(0.2).rgbString(),
                     borderColor: window.chartColors.blue,
                     pointBackgroundColor: window.chartColors.blue,
@@ -112,7 +115,7 @@
             data: {
                 labels: arrayCategory,
                 datasets: [{
-                    label: 'Resultados Por categorías',
+                    label: 'Resultados Por categorías (Media de todos los cuestionarios resueltos)',
                     backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
                     borderColor: window.chartColors.blue,
                     pointBackgroundColor: window.chartColors.blue,

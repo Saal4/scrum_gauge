@@ -8,4 +8,9 @@ public interface Questionnaire_submit_Repository extends JpaRepository<Questionn
 
     List<Questionnaire_submit> findAllByQuestionnaireCategoryAndUserId(String category, int id);
     List<Questionnaire_submit> findAllByUserId(int id);
+    List<Questionnaire_submit> findAllByQuestionnaireIsNull();
+    Questionnaire_submit findById(int id);
+
+    @Override
+    void deleteById(Integer integer);
 }

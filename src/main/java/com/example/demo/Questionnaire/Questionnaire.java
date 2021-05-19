@@ -20,6 +20,10 @@ public class Questionnaire{
     private String category;
     @Column(name= "Short_description")
     private String description;
+    @Column (name = "subtraction")
+    private boolean subtraction;
+    @Column (name = "time")
+    private int time;
     @JoinTable(
             name = "Question_questionnaire",
             joinColumns = @JoinColumn(name = "questionId", nullable = false, updatable = false),
@@ -47,34 +51,44 @@ public class Questionnaire{
         this.users = users;
     }
 
-    public Questionnaire(String name, String category, String description) {
+    public Questionnaire(String name, String category, String description,boolean subtraction,int time) {
         this.setName(name);
         this.setDescription(description);
+        this.subtraction = subtraction;
         this.setCategory(category);
         questions = new HashSet<>();
+        users = new HashSet<>();
         questionnaire_submits = new ArrayList<>();
+        this.time = time;
     }
-    public Questionnaire(String name, String category, String description, List<Question> questionsList,List<User>userslist) {
+    public Questionnaire(String name, String category, String description, List<Question> questionsList,List<User>userslist,boolean subtraction,int time) {
         this.setName(name);
+        this.subtraction = subtraction;
         this.setDescription(description);
         this.setCategory(category);
         questions = new HashSet<>(questionsList) ;
         users = new HashSet<>(userslist);
         questionnaire_submits = new ArrayList<>();
+        this.time = time;
     }
-    public void editQuestionnaire(String name, String category, String description, List<Question> questionsList,List<User>userList) {
+    public void editQuestionnaire(String name, String category, String description, List<Question> questionsList,List<User>userList,boolean subtraction,int time) {
+        this.subtraction = subtraction;
         this.setName(name);
         this.setDescription(description);
         this.setCategory(category);
         questions = new HashSet<>(questionsList) ;
         users = new HashSet<>(userList);
         questionnaire_submits = new ArrayList<>();
+        this.time = time;
     }
     public void addQuestionnaire_submit(Questionnaire_submit qs){
         if(this.questionnaire_submits == null){
             questionnaire_submits=new ArrayList<>();
         }
         this.questionnaire_submits.add(qs);
+    }
+    public void deleteQuestionnaire_submit(Questionnaire_submit qs){
+        this.questionnaire_submits.remove(qs);
     }
     public void removeUser(User u){
         this.users.remove(u);
@@ -117,12 +131,36 @@ public class Questionnaire{
         return description;
     }
 
+    public boolean isSubtraction() {
+        return subtraction;
+    }
+
+    public void setSubtraction(boolean subtraction) {
+        this.subtraction = subtraction;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
     public void addQuestion (Question q){
         this.questions.add(q);
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public List<Questionnaire_submit> getQuestionnaire_submits() {
+        return questionnaire_submits;
+    }
+
+    public void setQuestionnaire_submits(List<Questionnaire_submit> questionnaire_submits) {
+        this.questionnaire_submits = questionnaire_submits;
     }
 
     @Override

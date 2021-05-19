@@ -1,4 +1,13 @@
-
+.numberInput{
+    max-width: 7%!important;
+}
+.input-custom-group div, .input-custom-group input , .input-custom-group i{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+.modal-custom{
+    min-width: 70%!important;
+}
 /*
 estilos checkbox
  */
@@ -263,6 +272,34 @@ a{
     left: 50%;
     position: relative;
 }
+
+.fix-bottom{
+    margin-bottom: 80px;
+}
+#question_search_input,#questionnaire_search_input{
+    background-image: url('Search_icon_30.png');
+    background-position: 2px 10px;
+    background-repeat: no-repeat;
+    width: 94%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 2px solid #01015A;
+    margin-bottom: 12px;
+    margin-left: 3%;
+
+}
+.sticky-sidebar{
+    z-index: 2;
+}
+.main{
+    z-index: 1;
+}
+.custom-icon-delete{
+    font-size: 40px!important;
+}
+#questionnaire_card{
+    max-width: 90%;
+}
 .wrapper-custom{
     position: relative;
     top: 0;
@@ -371,4 +408,37 @@ body {
 }
 .form-control-selector{
     -webkit-appearance: listbox!important;
+}
+
+/*breadcrumb*/
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+}
+
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}
+ul.breadcrumb{
+    margin-left: 3%;
+    margin-right: 3%;
+    background-color: #eee;
 }

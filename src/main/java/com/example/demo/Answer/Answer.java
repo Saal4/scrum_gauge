@@ -4,6 +4,7 @@ package com.example.demo.Answer;
 import com.example.demo.Question.Question;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Answer {
@@ -12,19 +13,22 @@ public class Answer {
     @Column(name="Id")
     private int id;
     @Column(name="answer")
-    private String answer;
+    public String answer;
     @Column(name = "correct")
     private boolean correct;
+    @Column(name = "valueAnswer")
+    private int valueAnswer;
     @ManyToOne
     public Question question;
 
     public Answer() {
     }
 
-    public Answer(String answer, boolean correct, Question question) {
+    public Answer(String answer, boolean correct, Question question, int value) {
         this.answer = answer;
         this.correct = correct;
         this.question = question;
+        this.valueAnswer = value;
     }
 
     public int getId() {
@@ -59,11 +63,24 @@ public class Answer {
         this.question = question;
     }
 
+    public int getValueAnswer() {
+        return valueAnswer;
+    }
+
+    public void setValueAnswer(int valueAnswer) {
+        this.valueAnswer = valueAnswer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer answer = (Answer) o;
         return id == answer.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

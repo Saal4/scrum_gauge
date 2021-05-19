@@ -1,44 +1,60 @@
 {{#questions}}
-<div id="modal_body_id" class="modal-body">
+<div  id="modal_body_id" class="modal-body">
     <form id="form_edit_question">
         <input hidden class="form-control" name="questionId" required type="text" value="{{id}}" id="questionFormId">
         <label id="errorQuestion" style="color:red" hidden> Por favor debe rellenar la pregunta </label>
         <div class="form-group">
             <label for="Pregunta">Pregunta: </label>
-            <input type="text" name="question" required class="form-control" id="Pregunta" aria-describedby="emailHelp" value="{{question}}" placeholder="Pregunta">
+            <input type="text" onchange="element_change()" name="question" required class="form-control" id="Pregunta" aria-describedby="emailHelp"
+                   value="{{question}}" placeholder="Pregunta">
         </div>
-        <label id="errorTypeQuestion" style="color:red" hidden> El tipo de pregunta no se ajusta al numero de respuestas correctas seleccionadas </label>
+        <label id="errorTypeQuestion" style="color:red" hidden> El tipo de pregunta no se ajusta al numero de respuestas
+            correctas seleccionadas </label>
         <div class="form-group">
             <label for="type">Categoria:</label>
-            <select id="type" required class="form-control-selector form-control" name="question_type">
+            <select onchange="element_change()" id="type" required class="form-control-selector form-control" name="question_type">
                 {{#uniqueResponse}}
-                <option value="RU">Respuesta unica</option>
+                <option value="RU">Respuesta única</option>
                 {{/uniqueResponse}}
                 <option value="MR">Multi-respuesta</option>
                 {{^uniqueResponse}}
-                <option value="RU">Respuesta unica</option>
+                <option value="RU">Respuesta única</option>
                 {{/uniqueResponse}}
             </select>
         </div>
-        <input hidden class="form-control" name="numberAnswer" required type="number" max="8" value="{{numberAnswer}}" id="numberAnswer">
+        <input hidden class="form-control" name="numberAnswer" required type="number" max="8" value="{{numberAnswer}}"
+               id="numberAnswer">
         <label id="errorNumberAnswer" style="color:red" hidden> Debe de crear al menos dos respuestas </label>
-        <label id="errorNumberCorrectAnswer" style="color:red" hidden> Debe seleccionar al menos una respuesta correcta </label>
+        <label id="errorNumberCorrectAnswer" style="color:red" hidden> Debe seleccionar al menos una respuesta
+            correcta </label>
         <div id="respuestas" class="form-group">
             <label>Respuestas</label>
+            <br>
+            <div class="row" style="margin-left: 0">
+                <div class="col-md-6">Respuesta</div>
+                <div class="col-md-1" style="margin-left: 4%">Correcta</div>
+                <div class="col-md-1" style="margin-left: 3%">Penalización</div>
+                <div class="col-md-4"></div>
+            </div>
             {{#answers}}
             <div id="respuesta-{{id}}" class="input-custom-group input-group">
-                <input type="text" class="form-control" value="{{answer}}" aria-label="answer" aria-describedby="basic-addon2">
+                <input onchange="element_change()" type="text" class="form-control" value="{{answer}}" aria-label="answer"
+                       aria-describedby="basic-addon2">
                 <div>
-                    <select id="correct-respuesta-selected" class="form-control-selector form-control">
+                    <select onchange="setDisableInput(this);element_change()" id="correct-respuesta-selected" class="form-control-selector form-control">
                         <option value="true" {{#correct}}selected{{/correct}}>Correcta</option>
                         <option value="false" {{^correct}}selected{{/correct}}>Incorrecta</option>
                     </select>
                 </div>
-                <button class="btn btn-outline-secondary" onclick="deleteAnswerFromModal('{{id}}')" type="button">Eliminar</button>
+                <input onchange="element_change()" type="number" class="numberInput form-control" aria-label="answer"
+                       aria-describedby="basic-addon2" max="100" min="0"
+                       onkeypress="return event.charCode >= 48 && event.charCode <= 57" {{#correct}}value="0" disabled{{/correct}}{{^correct}}value={{valueAnswer}}{{/correct}}>
+                <a href="#" class="a-custom" onclick="deleteAnswerFromModal('{{id}}')"><i
+                        class="material-icons">delete</i></a>
             </div>
             {{/answers}}
         </div>
-        <a href="#"  onclick="addAnswerToModal()"><i id="add_answer_icon" class="a-form material-icons add_answer_icon">add_circle_outline</i></a>
+        <a href="#" onclick="addAnswerToModal()"><i id="add_answer_icon" class="a-form material-icons add_answer_icon">add_circle_outline</i></a>
     </form>
 </div>
 {{/questions}}

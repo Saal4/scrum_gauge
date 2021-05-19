@@ -21,7 +21,7 @@ public class Question {
     private Boolean uniqueResponse;
 
     @OneToMany(cascade= CascadeType.ALL ,mappedBy = "question")
-    private Set<Answer> answers;
+    private List<Answer> answers;
 
     @ManyToMany (cascade = {CascadeType.MERGE,CascadeType.DETACH},fetch = FetchType.LAZY, mappedBy = "preguntas")
     private List<Questionnaire_submit> questionnaire_submits;
@@ -32,7 +32,7 @@ public class Question {
 
     public Question() {
     }
-    public Question(String question, Set<Answer> answers, String type) {
+    public Question(String question, List<Answer> answers, String type) {
         this.question = question;
         this.setAnswers(answers);
         this.type = type;
@@ -42,7 +42,7 @@ public class Question {
     }
     public Question(String question, String type) {
         this.question = question;
-        this.answers = new HashSet<>();
+        this.answers = new ArrayList<>();
         this.type = type;
         this.setUniqueResponse(type.equals("RU"));
         questionnaire = new HashSet<>();
@@ -64,7 +64,7 @@ public class Question {
         this.questionnaire.add(q);
     }
     public void addQuestionnaire_submit(Questionnaire_submit qs){this.questionnaire_submits.add(qs);}
-    public void editQuestion(String question, Set<Answer> answers, String type){
+    public void editQuestion(String question, List<Answer> answers, String type){
         this.question = question;
         this.setAnswers(answers);
         this.type = type;
@@ -86,6 +86,13 @@ public class Question {
         this.question = question;
     }
 
+    public List<Questionnaire_submit> getQuestionnaire_submits() {
+        return questionnaire_submits;
+    }
+
+    public void setQuestionnaire_submits(List<Questionnaire_submit> questionnaire_submits) {
+        this.questionnaire_submits = questionnaire_submits;
+    }
 
     public String getType() {
         return type;
@@ -95,11 +102,11 @@ public class Question {
         this.type = type;
     }
 
-    public Set<Answer> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 

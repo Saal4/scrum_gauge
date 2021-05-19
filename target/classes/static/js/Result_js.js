@@ -247,15 +247,25 @@ function getNewChart(typeStr){
  * SECCIÓN CAMBIAR DE CHART
  */
 async function getRadar() {
+    var pickerValue = $("#checkBoxSwitch").prop("checked");
+    var titulo = "Grafico de araña (Media de todas las categorias seleccionadas)";
+    if(pickerValue==="true" || pickerValue === true){
+       titulo = "Grafico de araña (Media de todos los usuarios seleccionados)";
+    }
     var finalArray = getAverage(arrayPoints);
     var canvas = await replaceCavas("radar");
-    window.myRadar = new Chart(canvas, getConfigRadarCustom(arrayLabels, finalArray, "Grafico de araña (Media por usuario)"))
+    window.myRadar = new Chart(canvas, getConfigRadarCustom(arrayLabels, finalArray, titulo))
 }
 
 async function getBarV() {
+    var pickerValue = $("#checkBoxSwitch").prop("checked");
+    var titulo = "Grafico de araña (Media de todas las categorias seleccionadas)";
+    if(pickerValue==="true" || pickerValue === true){
+        titulo = "Grafico de araña (Media de todos los usuarios seleccionados)";
+    }
     var finalArray = getAverage(arrayPoints);
     var canvas = await replaceCavas("bar");
-    window.myRadar = new Chart(canvas, getConfigBarVCustom(arrayLabels, finalArray, 'Grafico de barras (Media por usuario)'));
+    window.myRadar = new Chart(canvas, getConfigBarVCustom(arrayLabels, finalArray, titulo));
 }
 
 async function getBarH() {

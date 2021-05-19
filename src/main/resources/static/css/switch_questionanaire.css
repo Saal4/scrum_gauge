@@ -1,12 +1,6 @@
-.footer-result{
-    margin-top: 0%;
-}
-.radar_result_page{
-    width: 1100px;
-    height: 600px;
-}
+
 #pickerSwitch .col-md-4, #pickerSwitch .col-md-5{
-    font-size: 16px;
+    font-size: 23px;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -31,7 +25,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #01015A;
+    background-color: lightgrey;
     -webkit-transition: .4s;
     transition: .4s;
 }

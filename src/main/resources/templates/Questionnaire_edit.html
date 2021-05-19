@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/general_style.css">
     <link rel="stylesheet" href="/css/Questionnaire_css.css">
     <link rel="stylesheet" href="/css/Questionnaire_edit_css.css">
+    <link rel="stylesheet" href="/css/switch_questionanaire.css">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
@@ -39,6 +40,12 @@
 <body>
 {{>Header}}
 {{#questionnaire}}
+<ul class="breadcrumb">
+    <li><a href="/MainPage">Home</a></li>
+    <li>Formularios</li>
+    <li><a href="/questionnaire">Administrar formularios</a></li>
+    <li><a href="#">{{name}}</a></li>
+</ul>
 <div class="container-custom container container-questionnaire-edit">
     <div class="card card-4">
         <div class="card-body-custom card-body">
@@ -70,10 +77,13 @@
                         </div>
                     </div>
                     <div id="custom-md6" class="col-md-6">
-                        <label for="selector">Usuarios asignados</label>
+                        <label for="selectorQuestionnaire">Usuarios asignados</label>
                         <br>
-                        <select id="selector" class="selectpicker-custom selectpicker" multiple data-live-search="true">
+                        <select id="selectorQuestionnaire" class="selectpicker-custom selectpicker" multiple
+                                data-live-search="true">
                             <option disabled>id - usuario - nombre</option>
+                            <option {{#selected}}selected{{
+                            /selected}} value="all" id="all">Todos los usuarios</option>
                             {{#users}}
                             <option selected>{{id}} - {{username}} - {{name}}</option>
                             {{/users}}
@@ -81,6 +91,34 @@
                             <option>{{id}} - {{username}} - {{name}}</option>
                             {{/userslist}}
                         </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Formulario con penalización por fallo:</h4>
+                            </div>
+                            <div class="col-md-3" style="margin-left: -6%;">
+                                 <label class="switch">
+                                    <input type="checkbox" {{#subtraction}}checked{{/subtraction}} id="checkBoxSwitch">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9"><h4>Tiempo en minutos del cuestionario(0 si tiene tiempo ilimitado):</h4></div>
+                            <div class="col-md-3" style="margin-left: -7%;">
+                                <input id="time" type="number" class="numberInput form-control" aria-label="answer"
+                                       aria-describedby="basic-addon2" min="0" value="{{time}}" style="min-width: 50%"
+                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
                     </div>
                 </div>
                 <br>
@@ -135,8 +173,9 @@
 
                 </div>
                 <br>
-                    <button onclick="saveQuestionnaire()" type="button" class="button-custom-login btn btn-primary">Guardar cuestionario
-                    </button>
+                <button onclick="saveQuestionnaire()" type="button" class="button-custom-login btn btn-primary">Guardar
+                    cuestionario
+                </button>
             </form>
         </div>
     </div>
@@ -144,8 +183,8 @@
 {{/questionnaire}}
 {{>Footer}}
 <script>
-    window.onload =function () {
-        autoComplete(document.getElementById("category"),document.getElementById("categories").value);
+    window.onload = function () {
+        autoComplete(document.getElementById("category"), document.getElementById("categories").value);
     }
 </script>
 

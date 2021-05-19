@@ -1,0 +1,17 @@
+.answer-RC{
+    background-color: lightgreen!important;
+}
+.answer-RI{
+    background-color: lightcoral!important;
+}
+.point-question-class{
+    text-align: center;
+    background-color: silver;
+}
+.bg-custom{
+    background-color: silver!important;
+}
+.point-question-content{
+    margin-top: 50%;
+    margin-bottom: 50%;
+}

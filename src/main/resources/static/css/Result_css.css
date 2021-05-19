@@ -17,5 +17,14 @@
     font-size: 22px;
     margin-top: 12%;
     background-color: #eeeec3!important;
-    margin-left: 2%
+    margin-left:-15%
+}
+.radar{
+    width:1400px !important;
+    height:800px !important;
+    margin-left: -15%;
+}
+canvas{
+    width: 1000px!important;
+    height: 750px!important;
 }

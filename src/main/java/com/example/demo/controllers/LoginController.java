@@ -23,6 +23,10 @@ public class LoginController {
     @Autowired
     private UserComponent userComponent;
 
+    @RequestMapping("/")
+    public String emptyPage(Model model){
+        return "redirect:/logIn";
+    }
     @RequestMapping("/logIn")
     public String logIn(Model model) {
         model.addAttribute("inOut", "out");

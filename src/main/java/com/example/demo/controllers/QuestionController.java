@@ -2,12 +2,16 @@ package com.example.demo.controllers;
 
 import com.example.demo.Question.Question;
 import com.example.demo.Question.QuestionRepository;
+import com.example.demo.Questionnaire.QuestionnaireRespository;
+import com.example.demo.Questionnaire_submit.Questionnaire_submit;
+import com.example.demo.Questionnaire_submit.Questionnaire_submit_Repository;
 import com.example.demo.user.User;
 import com.example.demo.user.UserComponent;
 import com.example.demo.user.UserRepository;
 import com.example.demo.Answer.Answer;
 import com.example.demo.Answer.AnswerRepository;
 import com.example.demo.Questionnaire.Questionnaire;
+import org.apache.coyote.http11.filters.IdentityOutputFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +27,11 @@ public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    Questionnaire_submit_Repository questionnaire_submit_repository;
+
+    @Autowired
+    QuestionnaireRespository questionnaireRespository;
     @Autowired
     AnswerRepository answerRespository;
 
@@ -60,38 +69,58 @@ public class QuestionController {
     public String saveQuestion(Model model, @RequestParam String questionId, @RequestParam String question,
                                @RequestParam String question_type, @RequestParam String answers) {
 
-
         Question newQuestion;
         if (questionId.equals("new")) {
             newQuestion = new Question(question, question_type);
         } else {
             newQuestion = questionRepository.getQuestionById(Integer.parseInt(questionId));
             Collection<Answer> answers1 = newQuestion.getAnswers();
+            Collection<Questionnaire_submit> questionnaire_submits = newQuestion.getQuestionnaire_submits();
+            for(Questionnaire_submit q1: questionnaire_submits){
+                User user = q1.getUser();
+                user.remove_Questionnaire_submit(q1);
+                q1.setUser(null);
+                Questionnaire questionnaire = q1.getQuestionnaire();
+                questionnaire.deleteQuestionnaire_submit(q1);
+                q1.setQuestionnaire(null);
+                userRepository.save(user);
+                questionnaireRespository.save(questionnaire);
+                questionnaire_submit_repository.deleteById(q1.getId());
+            }
             for (Answer a1: answers1){
                 answerRespository.deleteById(a1.getId());
             }
             List<Answer> testlist = answerRespository.findAllByQuestionId(newQuestion.getId());
-            newQuestion.setAnswers(new HashSet<>());
+            newQuestion.setAnswers(new ArrayList<>());
         }
-        String[] answer = answers.split(",");
-        Set<Answer>answerSet = new HashSet<>();
+        //System.out.println(answers);
+        String[] answer = answers.split("·");
+        ArrayList<Answer> aux = new ArrayList<>();
         for (String s:answer){
             String[] sAux = s.split("#");
             Answer answer1;
-            answer1 = new Answer(sAux[0],Boolean.parseBoolean(sAux[1]),newQuestion);
-            answerSet.add(answer1);
-
+            //System.out.println(Arrays.toString(sAux));
+            answer1 = new Answer(sAux[0],Boolean.parseBoolean(sAux[1]),newQuestion,Integer.parseInt(sAux[2]));
+            aux.add(answer1);
+            //System.out.println(aux.size());
+            //answerSet.add(answer1);
         }
-
-        newQuestion.editQuestion(question,answerSet,question_type);
+        newQuestion.editQuestion(question,aux,question_type);
         questionRepository.save(newQuestion);
-        for (Answer a:answerSet){
+        for (Answer a:aux){
+            //System.out.println("test");
             answerRespository.save(a);
         }
+        this.remove_null_questionnaire();
         return "redirect:/questions";
 
     }
-
+    private void remove_null_questionnaire(){
+        List<Questionnaire_submit> questionnaire_submits = questionnaire_submit_repository.findAllByQuestionnaireIsNull();
+        for (Questionnaire_submit q:questionnaire_submits ) {
+            questionnaire_submit_repository.deleteById(q.getId());
+        }
+    }
     @RequestMapping("/question/edit/{id}")
     public String editQuestion(Model model, @PathVariable String id) {
         User u = userComponent.getLoggedUser();
@@ -112,7 +141,7 @@ public class QuestionController {
             return "modal_edit_question";
         }
         Question question = questionRepository.getQuestionById(Integer.parseInt(id));
-        Set<Answer> answer = question.getAnswers();
+        List<Answer> answer = question.getAnswers();
         model.addAttribute("questions", question);
         model.addAttribute("numberAnswer", answer.size());
         model.addAttribute("uniqueResponse", question.getType().equals("RU"));

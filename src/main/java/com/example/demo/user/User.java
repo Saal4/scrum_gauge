@@ -26,10 +26,10 @@ public class User {
     private String password;
     @Column(name="Rol")
     private String rol;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH},fetch = FetchType.EAGER , mappedBy = "users")
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.DETACH},fetch = FetchType.EAGER , mappedBy = "users")
     private Set<Questionnaire> questionnaires;
 
-    @OneToMany(cascade= CascadeType.ALL ,mappedBy = "user")
+    @OneToMany(cascade={CascadeType.REMOVE},mappedBy = "user")
     private Set<Questionnaire_submit> questionnaire_submits;
 
     public User() {
@@ -57,6 +57,26 @@ public class User {
     public void addQuestionnaire_submit (Questionnaire_submit q){
         this.questionnaire_submits.add(q);
     }
+
+    public Set<Questionnaire_submit> getQuestionnaire_submits() {
+        return questionnaire_submits;
+    }
+
+    public void setQuestionnaire_submits(Set<Questionnaire_submit> questionnaire_submits) {
+        this.questionnaire_submits = questionnaire_submits;
+    }
+
+    public Set<Questionnaire_submit> remove_Questionnaire_submit(Questionnaire_submit q){
+        Set<Questionnaire_submit> questionnaire_submit= new HashSet<>();
+        for (Questionnaire_submit q1: this.questionnaire_submits) {
+            if(q1.getId() != q.getId()){
+                questionnaire_submit.add(q1);
+            }
+        }
+        this.questionnaire_submits = questionnaire_submit;
+        return questionnaire_submit;
+    }
+
     public Set<Questionnaire> getQuestionnaires() {
         return questionnaires;
     }

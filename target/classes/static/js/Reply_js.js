@@ -3,11 +3,14 @@ window.onbeforeunload = function() {
     return true;
 };
 
-function submitQuestionnaire(){
+function submitQuestionnaire(withCrono){
+    stopCrono();
     window.onbeforeunload = false;
-    if (!confirm('¿Estas seguro que desea enviar?')) {
-        window.onbeforeunload = true;
-        return;
+    if(withCrono === false) {
+        if (!confirm('¿Estas seguro que desea enviar?')) {
+            window.onbeforeunload = true;
+            return;
+        }
     }
     var id = document.getElementsByClassName("card-body-custom")[0].getAttribute("id").split("-")[1];
     var container = document.getElementsByClassName("card-body-custom")[0];

@@ -109,7 +109,7 @@ public class MainController {
                 continue;
             }
             double total = (percent * 100) / number;
-            if (total > 100) {
+            if (total > 99.5) {
                 total = 100;
             }
             percentageAux.remove(i);
@@ -165,9 +165,6 @@ public class MainController {
                 }
             }
         } else {
-            //Dividir entre el numero de con el array de arriba
-            //crear grafico de barras
-            //hacer bien las formatos
             for (Questionnaire questionnaire : questionnaires) {
                 if (!categoryTotal.containsKey(questionnaire.getCategory())) {
                     categoryTotal.put(questionnaire.getCategory(), categories.size());
@@ -181,7 +178,7 @@ public class MainController {
             for (Questionnaire_submit q : listaSubmited) {
                 String category = q.getQuestionnaire().getCategory();
                 double totalQuestionnaire = q.correctQuestionnaire();
-                int position = categories.size();
+                int position;
                 if (categoryTotal.containsKey(category)) {
                     position = categoryTotal.get(category);
                     double totalNow = percentage.get(position);
@@ -202,13 +199,13 @@ public class MainController {
                 continue;
             }
             double total = (percent * 100) / number;
-            if (total > 100) {
+            if (total > 99.5) {
                 total = 100;
             }
             percentageAux.remove(i);
             percentageAux.add(i, total);
         }
-        model.addAttribute("userslist", userList);
+        model.addAttribute("userslist", role.equals("ROLE_USER")?new ArrayList<>(Collections.singletonList(user)):userList);
         model.addAttribute("scrum_user", !role.equals("ROLE_USER"));
         model.addAttribute("role", role.equals("ROLE_USER") ? "User" : "Scrum Master");
         model.addAttribute("count", count);
@@ -224,7 +221,13 @@ public class MainController {
         String[] groupBy;
         String[] dataLabel;
         List<User> userList = new ArrayList<>();
-        if (users.equals("all")){
+        User actual_user = userComponent.getLoggedUser();
+        int id_actual_user = actual_user.getId();
+        User user = userRepository.getUserById(id_actual_user);
+        String role = user.getRol();
+        if(role.equals("ROLE_USER")){
+            userList = Collections.singletonList(user);
+        }else if (users.equals("all")){
             userList = userRepository.findAll();
         }else{
             String[] usersId = users.split(",");
@@ -236,7 +239,7 @@ public class MainController {
             }
         }
         String[] categoriesString = categories.split(",");
-        String str = "";
+        String str;
         if(type.equals("User")){
             str = getUserJson(userList,categoriesString);
         }else{
@@ -276,7 +279,7 @@ public class MainController {
         return finalJsonStr;
     }
     private String getCategoryJson(String[] categoriesList, List<User> userList){
-        ArrayList<Double> totalArray = new ArrayList<>();
+        ArrayList<Double> totalArray;
         HashMap<String, ArrayList<Double>> finalJsonArray = new HashMap<>();
         double totalCero = 0.0;
         boolean first = true;
@@ -314,7 +317,6 @@ public class MainController {
             json += entry.getKey() + ":" + entry.getValue().toString() + "|";
         }
         json = json.substring(0, json.length() - 1);
-        //System.out.println(json);
         return json;
     }
 

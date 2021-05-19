@@ -22,6 +22,7 @@
     <script src="/js/core/popper.min.js" type="text/javascript"></script>
     <script src="/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
     <script src="/js/general_script.js" type="text/javascript"></script>
+    <script src="/js/Search_Question.js" type="text/javascript"></script>
 
     <!-- Plugin for the Perfect Scrollbar -->
     <script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -82,15 +83,21 @@
 </head>
 <body>
 {{>Header}}
-<div class="container-custom container">
-    <table class="table">
+<ul class="breadcrumb">
+    <li><a href="/MainPage">Home</a></li>
+    <li>Preguntas</li>
+    <li><a href="#">Administrar preguntas</a></li>
+</ul>
+<input type="text" id="question_search_input" onkeyup="SearchQuestion()" placeholder="Escribe aquí para buscar" title="Escribe aquí para buscar">
+<div class="fix-bottom container-custom container">
+    <table id="question_table" class="table">
         <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Preguntas</th>
             <th scope="col">Tipo</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Borrar</th>
         </tr>
         </thead>
         <tbody>
@@ -109,11 +116,11 @@
 </div>
 {{>Footer}}
 
-<div class="modal fade" id="edit_preguntas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal-custom modal fade" id="edit_preguntas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-custom modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="title_edit">Edit Question</h5>
+                <h5 class="modal-title" id="title_edit">Editar pregunta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

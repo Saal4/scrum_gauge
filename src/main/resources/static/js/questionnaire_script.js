@@ -1,3 +1,31 @@
+var lastValueUSerSelector = 2;
+var firstChange = true;
+$(document).ready(function () {
+    $('#selectorQuestionnaire').change(function () {
+        var values = $("#selectorQuestionnaire").val();
+        if (values && values[0] === "all" && lastValueUSerSelector === 1) {
+            values.shift();
+            console.log("Caso 1 " + values);
+            $('#selectorQuestionnaire').selectpicker("val", values);
+            lastValueUSerSelector = 2;
+            firstChange = false;
+        } else if (values && values[0] === "all" && lastValueUSerSelector === 2) {
+            $('#selectorQuestionnaire').selectpicker("selectAll");
+            lastValueUSerSelector = 1;
+            firstChange = false;
+        } else if (values && values[0] !== "all" && lastValueUSerSelector === 1) {
+            $('#selectorQuestionnaire').selectpicker("deselectAll");
+            lastValueUSerSelector = 2;
+            firstChange = false;
+        }else if (values && values[0] !== "all" && firstChange) {//&& lastValueUSerSelector === 1
+            $('#selectorQuestionnaire').selectpicker("deselectAll");
+            lastValueUSerSelector = 2;
+            firstChange = false;
+        }
+    });
+});
+
+
 $( function() {
     $( "#sortable1, #sortable2" ).sortable({
         connectWith: ".connectedSortable"
@@ -38,21 +66,24 @@ function saveQuestionnaire(){
         questionArray.push(ulArray[i].id.split("-")[1]);
     }
 
-    var values = $('#selector').val();
-    if(questionArray.length === 0 && values && values.length>0){
+    var users = $('#selectorQuestionnaire').val();
+    if (questionArray.length === 0 && users && users.length > 0) {
         alert("No puede asignar un cuestionario sin preguntas a un usuario");
         return;
     }
-    if(!values) {
-        values = [];
-    }else{
-        var aux = [];
-        for(var valu= 0; valu<values.length;valu++){
-            var str = values[valu].split("-")[0];
-            str = str.trim();
-            aux.push(str);
+    if (!users) {
+        users = [];
+    } else {
+        var usersAux = "all";
+        if (users[0] !== "all") {
+            usersAux = [];
+            for (let i = 0; i < users.length; i++) {
+                var str = users[i].split("-")[0];
+                str = str.trim();
+                usersAux.push(str);
+            }
         }
-        values = aux;
+        users = usersAux;
     }
     var name = document.getElementById("name").value;
     var description = document.getElementById("description").value;
@@ -62,7 +93,9 @@ function saveQuestionnaire(){
     if(id === "-1"){
         id = "new";
     }
-    console.log(id + "    " + category + "   " + description + "    " + name);
+    //console.log(id + "    " + category + "   " + description + "    " + name);
+    var subtract = $("#checkBoxSwitch").prop("checked");
+    var minute = document.getElementById("time").value;
     $.ajax({
         url: "/questionnaire/save",
         data: {
@@ -71,9 +104,15 @@ function saveQuestionnaire(){
             category: category,
             description:description,
             idQuestion: questionArray.toString(),
-            users: values.toString(),
+            users: users.toString(),
+            subtract:subtract.toString(),
+            minute:minute,
         }
     }).done(function () {
         window.location.href="/questionnaire";
     });
+}
+
+function deleteQuestionaire(id) {
+        document.getElementById("deleteButton").setAttribute("action", "/questionnaire/delete/" + id);
 }

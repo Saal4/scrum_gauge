@@ -60,9 +60,13 @@
 </head>
 <body>
 {{>Header}}
+<ul class="breadcrumb">
+    <li><a href="/MainPage">Home</a></li>
+    <li><a href="#">Resultados</a></li>
+</ul>
 <div class="container-custom container" style="min-height: 100%; margin-top:-1%; min-width: 100%">
     <div class="row">
-        <div class="col-md-3" id="sticky-sidebar">
+        <div class="col-md-3" id="sticky-sidebar" style="z-index: 2;">
             <div class="card-filtros card card-4">
                 <div class="card-header">
                     <div class="card-header" style="background: #01015A;color: white;font-size: 24px;">
@@ -99,13 +103,13 @@
                     <label for="pickerSwitch">Agrupado por: </label>
                     <div class="row" id="pickerSwitch">
                         <div class="col-md-4">Usuarios</div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label class="switch">
                                 <input type="checkbox" checked id="checkBoxSwitch">
                                 <span class="slider round"></span>
                             </label>
                         </div>
-                        <div class="col-md-5">Categorias</div>
+                        <div class="col-md-4">Categorias</div>
                     </div>
                     <button class="button-custom-filtro btn btn-lg btn-primary btn-block" onclick="filter()"
                             type="submit">Filtrar
@@ -124,7 +128,7 @@
                                     id="iconHorizontal" class="material-icons">sort</i><br>Barras<br> horizantes
                             </button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <button id="araña" onclick="getConfigRadar()" class="change-chart"><i id="iconAraña"
                                                                                                   class="material-icons">device_hub</i><br>Araña<br>(Media)
                             </button>
@@ -136,9 +140,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9" id="main">
-                <canvas id="canvas" class="radar_result_page radar"></canvas>
+        <div onload="filter()" class="col-md-9" id="main" style="z-index: 1">
+                <canvas class="radar_result_page radar" id="canvas" ></canvas>
         </div>
     </div>
-</div>
+</div >
 {{>Footer}}

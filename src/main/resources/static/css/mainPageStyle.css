@@ -3,7 +3,12 @@
     width: 50%;
     background: lightgray;
 }
+canvas{
 
+    width:950px !important;
+    height:440px !important;
+
+}
 .card .card-body {
     padding: 0.9375rem 20px;
     position: relative;

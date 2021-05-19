@@ -20,9 +20,10 @@
     <script src="/js/core/jquery.min.js" type="text/javascript"></script>
     <script src="/js/core/popper.min.js" type="text/javascript"></script>
     <script src="/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-    <script src="/js/questionnaire_script.js" type="text/javascript">
+    <script src="/js/questionnaire_script.js" type="text/javascript"></script>
+    <script src="/js/Search_Questionnaire.js" type="text/javascript"></script>
 
-    <!-- Plugin for the Perfect Scrollbar -->
+    <!-- Plugin for the Perfect Scrollbar-->
     <script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
     <!-- Plugin for the momentJs  -->
@@ -81,17 +82,30 @@
 </head>
 <body>
 {{>Header}}
-<div class="container-custom container">
+<ul class="breadcrumb">
+    <li><a href="/MainPage">Home</a></li>
+    <li>Formularios</li>
+    <li><a href="#">Administrar formularios</a></li>
+</ul>
+<input type="text" id="questionnaire_search_input" onkeyup="SearchQuestionnaire()" placeholder="Escribe aquí para buscar" title="Escribe aquí para buscar">
+<div class="container-custom container" id="questionnaire_list">
     <div class="row">
     {{#questionnnaires}}
 
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-body">
+                <div id="questionnaire_card" class="card-body">
                     <h5 class="card-title">{{name}}</h5>
                     <h6 class = "card-text">{{category}}</h6>
                     <p class="card-text">{{description}}</p>
-                    <a href="/questionnaire/edit/{{id}}"  class="buttom-custom-form btn btn-primary">Editar formulario</a>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <a href="/questionnaire/edit/{{id}}"  class="buttom-custom-form btn btn-primary">Editar formulario</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a class ="a-custom" href="#" onclick='deleteQuestionaire("{{id}}")' data-toggle="modal" data-target="#confirm_delete_questionnaire"><i class="custom-icon-delete material-icons" data-toggle="tooltip" data-placement="top" title="Eliminar cuestionario">delete</i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,6 +116,27 @@
 </div>
 {{>Footer}}
 
+<div class="modal fade" id="confirm_delete_questionnaire" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_delete">Borrar Pregunta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que desea borrar este cuestionario?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button-custom-login btn btn-primary" data-dismiss="modal">Cancelar</button>
+                <form id="deleteButton" action="">
+                    <button  type="submit"  class="btn btn-secondary">Borrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
